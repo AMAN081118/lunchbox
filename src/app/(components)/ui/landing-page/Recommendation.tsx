@@ -15,7 +15,7 @@ interface Meal {
 
 // --- CONSTANTS ---
 const MEALS_PER_LOAD = 5;
-const MAX_MEALS = 50;
+const MAX_MEALS = 5;
 const RANDOM_MEAL_API = "https://www.themealdb.com/api/json/v1/1/random.php";
 
 // --- MEAL CARD COMPONENT ---
@@ -136,12 +136,10 @@ const Recommendation: React.FC = () => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto font-sans">
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center mb-2">
-        Random Meal Explorer 🍔
+      <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">
+        Best Food in H4
       </h1>
-      <p className="text-center text-gray-500 mb-8 sm:mb-12">
-        Scroll down to discover up to {MAX_MEALS} unique dishes from TheMealDB.
-      </p>
+      <p className="text-gray-500 mb-8 sm:mb-12">Scroll down to discover</p>
 
       {error && (
         <div className="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg text-center">
@@ -152,7 +150,10 @@ const Recommendation: React.FC = () => {
       {/* Responsive Grid Layout: Mobile-first (1-col) -> Tablet (2-col) -> Desktop (3-col) */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {meals.map((meal) => (
-          <MealCard key={meal.idMeal + meal.strMeal} meal={meal} />
+          <MealCard
+            key={meal.idMeal + meal.strMeal + Math.random() * 1000}
+            meal={meal}
+          />
         ))}
       </div>
 
@@ -170,8 +171,8 @@ const Recommendation: React.FC = () => {
         )}
 
         {!hasMore && meals.length > 0 && (
-          <p className="text-lg font-medium text-green-600 mt-4">
-            That's all the meals! (Total: {meals.length})
+          <p className="text-lg font-medium mt-4">
+            That's all the meals! Explore more
           </p>
         )}
       </div>
