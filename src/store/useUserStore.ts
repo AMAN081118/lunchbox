@@ -1,24 +1,22 @@
 import { create } from "zustand";
 
-interface UserProfile {
+export interface UserProfile {
   id: string;
   full_name: string;
-  phone: string;
   email: string;
+  phone: string;
   hostel_id: string;
   preferred_canteen_id: string;
   gender: string;
-  role: "student" | "owner";
+  role: string;
 }
 
-interface UserStore {
+interface UserState {
   profile: UserProfile | null;
-  setProfile: (profile: UserProfile) => void;
-  clearProfile: () => void;
+  setProfile: (profile: UserProfile | null) => void;
 }
 
-export const useUserStore = create<UserStore>((set) => ({
+export const useUserStore = create<UserState>((set) => ({
   profile: null,
   setProfile: (profile) => set({ profile }),
-  clearProfile: () => set({ profile: null }),
 }));
